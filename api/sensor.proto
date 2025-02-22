@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package sensor;
+
+option go_package = "/proto";
+
+service SensorService{
+  rpc GetSensor(SensorRequest) returns (SensorResponse);
+  rpc StreamSensor(SensorRequest) returns (stream SensorResponse);
+}
+
+
+message SensorRequest {
+  string sensor_id = 1;
+}
+
+message SensorResponse {
+  string sensor_id = 1;
+  double temper = 2;
+  string time = 3;
+}
