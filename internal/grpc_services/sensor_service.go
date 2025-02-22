@@ -2,7 +2,6 @@ package grpc_services
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/sanda0/mqtt_grpc_demo/internal/db"
@@ -20,7 +19,6 @@ type SensorService struct {
 func (s *SensorService) GetSensor(ctx context.Context, in *proto.SensorRequest) (*proto.SensorResponse, error) {
 	db.Mu.Lock()
 	defer db.Mu.Unlock()
-	fmt.Println("GetSensorData")
 	data, exsits := db.SensorData[in.SensorId]
 	if !exsits {
 		return nil, status.Errorf(codes.NotFound, "Sensor not found")
